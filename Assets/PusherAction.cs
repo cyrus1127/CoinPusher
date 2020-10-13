@@ -30,7 +30,7 @@ public class PusherAction : MonoBehaviour
             newMove.z += moveSpeedInDeltaTime;
             if (NewMove.z - startPoint >= moveDistance)
             {
-                Debug.Log("case [" + isMoveToward + "] : switch (" + moveDistance + ") -> " + NewMove.z);
+                //Debug.Log("case [" + isMoveToward + "] : switch (" + moveDistance + ") -> " + NewMove.z);
                 isMoveToward = false;
                 //newMove.z = moveDistance;
             }
@@ -38,7 +38,7 @@ public class PusherAction : MonoBehaviour
             newMove.z -= moveSpeedInDeltaTime;
             if (NewMove.z - startPoint <= endPoint)
             {
-                Debug.Log("case [" + isMoveToward + "] : switch (" + moveDistance + ") -> " + NewMove.z);
+                //Debug.Log("case [" + isMoveToward + "] : switch (" + moveDistance + ") -> " + NewMove.z);
                 isMoveToward = true;
                 //newMove.z = endPoint;
             }
