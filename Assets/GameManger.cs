@@ -7,12 +7,19 @@ using UnityEngine.UI;
 public class GameManger : MonoBehaviour
 {
 
+    //Canvas
+    public Canvas myCanvas;
+
+    //Board
     public CoinDropController dropper;
+    public BonusDropController dropper_bonus;
     public Camera Camera;
     public GameObject TouchPlane;
     public GameObject txt_cash_val;
     public GameObject txt_total_coin_val;
+    public GameObject txt_coinTimer_val;
 
+    //Game Logic
     public float second_tofillCoins = 3f;  //3 sec
     float timeCounter_fillCoins;
     readonly int max_coins = 99999;
@@ -22,27 +29,61 @@ public class GameManger : MonoBehaviour
     int total_coins = 0;
     int total_score = 0;
 
+
     // Start is called before the first frame update
     void Start()
     {
+
+        //set Canvas camera
+        if (myCanvas)
+        {
+            myCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+        }
+
         total_coins = init_coins;
+        timeCounter_fillCoins = second_tofillCoins;
         UpdateCoinsVal();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeCounter_fillCoins += Time.deltaTime;
-        if (timeCounter_fillCoins >= second_tofillCoins) {
+        UpdateTimerCounter();
+        UpdateCoinsVal();
+    }
+
+    private void UpdateTimerCounter()
+    {
+        
+        timeCounter_fillCoins -= Time.deltaTime;
+        if (timeCounter_fillCoins <= 0)
+        {
             if (total_coins < max_coins)
             {
                 total_coins++;
             }
 
-            timeCounter_fillCoins = 0;
+            timeCounter_fillCoins = second_tofillCoins;
         }
 
-        UpdateCoinsVal();
+        int minute = (int)timeCounter_fillCoins / 60;
+        int second = (int)timeCounter_fillCoins % 60;
+        string minute_text = AutoFillZoreUnderHundred(minute); 
+        string second_text = AutoFillZoreUnderHundred(second);
+
+        txt_coinTimer_val.GetComponent<Text>().text = minute_text + ":" + second_text;
+    }
+
+    //Cyrus : for general use
+    //will move for common use
+    public string AutoFillZoreUnderHundred(int number)
+    {
+        string text = number.ToString();
+        if (number < 10)
+        {
+            text = "0" + number.ToString();
+        }
+        return text;
     }
 
     private void UpdateCoinsVal()
