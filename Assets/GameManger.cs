@@ -29,10 +29,14 @@ public class GameManger : MonoBehaviour
     int total_coins = 0;
     int total_score = 0;
 
-
+    /// <summary>
+    /// Life Cycle
+    /// </summary>
     // Start is called before the first frame update
     void Start()
     {
+        
+
 
         //set Canvas camera
         if (myCanvas)
@@ -51,6 +55,11 @@ public class GameManger : MonoBehaviour
         UpdateTimerCounter();
         UpdateCoinsVal();
     }
+
+    
+    /// <summary>
+    // Funcitons
+    /// </summary>
 
     private void UpdateTimerCounter()
     {
