@@ -19,7 +19,7 @@ Develop with 2020.1.8f1.
 * Game Features
 
 
+![Screenshot 1](https://github.com/user-attachments/assets/e807f33a-7ac6-4b1a-8e03-5502874ff277)
 
+![Preview - sample](https://github.com/user-attachments/assets/4c6a8366-b777-4422-bc22-4cc673600cac)
 
-
-![Screenshot 2025-07-01 at 11 53 06](https://github.com/user-attachments/assets/e807f33a-7ac6-4b1a-8e03-5502874ff277)
