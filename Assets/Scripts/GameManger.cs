@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 
-public class GameManger : MonoBehaviour
+public class GameManger : CommonSceneViewManager
 {
 
     //Canvas
@@ -21,22 +21,22 @@ public class GameManger : MonoBehaviour
 
     //Game Logic
     public float second_tofillCoins = 3f;  //3 sec
-    float timeCounter_fillCoins;
-    readonly int max_coins = 99999;
-    readonly int init_coins = 100;
-    readonly int score_special_1 = 10;
-    readonly int score_special_2 = 100;
-    int total_coins = 0;
-    int total_score = 0;
+    protected float timeCounter_fillCoins;
+    readonly protected int max_coins = 99999;
+    readonly protected int init_coins = 100;
+    readonly protected int score_special_1 = 10;
+    readonly protected int score_special_2 = 100;
+    protected int total_coins = 0;
+    protected int total_score = 0;
 
     /// <summary>
     /// Life Cycle
     /// </summary>
     // Start is called before the first frame update
-    void Start()
-    {
-        
 
+    protected override void InitAtStart()
+    {
+        base.InitAtStart();
 
         //set Canvas camera
         if (myCanvas)
@@ -47,6 +47,13 @@ public class GameManger : MonoBehaviour
         total_coins = init_coins;
         timeCounter_fillCoins = second_tofillCoins;
         UpdateCoinsVal();
+
+        Init();
+    }
+    
+    protected virtual void Init()
+    {
+        
     }
 
     // Update is called once per frame
@@ -54,14 +61,19 @@ public class GameManger : MonoBehaviour
     {
         UpdateTimerCounter();
         UpdateCoinsVal();
+        UpdateChild();
     }
 
-    
+    protected virtual void UpdateChild()
+    {
+
+    }
+
     /// <summary>
     // Funcitons
     /// </summary>
 
-    private void UpdateTimerCounter()
+    protected void UpdateTimerCounter()
     {
         
         timeCounter_fillCoins -= Time.deltaTime;
@@ -95,7 +107,7 @@ public class GameManger : MonoBehaviour
         return text;
     }
 
-    private void UpdateCoinsVal()
+    protected void UpdateCoinsVal()
     {
         if (txt_total_coin_val)
         {
@@ -103,7 +115,7 @@ public class GameManger : MonoBehaviour
         }
     }
 
-    private void UpdateScoreVal()
+    protected void UpdateScoreVal()
     {
         if (txt_cash_val)
         {
@@ -111,23 +123,12 @@ public class GameManger : MonoBehaviour
         }
     }
 
-    [System.Obsolete]
-    public void TouchPlaneOnTouched() {
-        //Debug.Log("Func TouchPlaneOnTouched() called");
-        if (total_coins > 0) {
-            if (dropper)
-            {
-                total_coins--;
-                dropper.DoDropCoins();
-            }
-        }
-
-        //do update
-        UpdateCoinsVal();
+    public virtual void TouchPlaneOnTouched() {
+       
     }
 
-    [System.Obsolete]
-    public void GetScore() {
+    
+    public virtual void GetScore() {
         total_score++;
         UpdateScoreVal();
         //Debug.Log("GetScore : current score ? " + total_score);
@@ -143,6 +144,5 @@ public class GameManger : MonoBehaviour
                 dropper.DoDropSepicalObject(-1); // Cyrus : drop radmon items
             }
         }
-        
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinOutHandler : MonoBehaviour
+public class BallInholeHandler : MonoBehaviour
 {
     public bool isNoPointArea;
     public GameManger manger;
@@ -18,8 +18,7 @@ public class CoinOutHandler : MonoBehaviour
     {
         
     }
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer.Equals(9))
@@ -28,19 +27,14 @@ public class CoinOutHandler : MonoBehaviour
             {
                 //do nothing for score
                 Destroy(other.gameObject);
-
-                if (manger != null && manger.GetComponent<GameMangerBubbleUp>() != null)
-                {
-                    manger.GetComponent<GameMangerBubbleUp>().BallInTheHole();
-                }
             }
             else
             {
-                if (manger != null)
-                    manger.GetScore();
+                manger.GetScore();
             }
         }
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -49,15 +43,9 @@ public class CoinOutHandler : MonoBehaviour
             {
                 //do nothing for score
                 Destroy(collision.gameObject);
-
-                if (manger != null && manger.GetComponent<GameMangerBubbleUp>() != null)
-                {
-                    manger.GetComponent<GameMangerBubbleUp>().BallInTheHole();
-                }
             }
             else {
-                if(manger != null)
-                    manger.GetScore();
+                manger.GetScore();
             }
         }
     }
